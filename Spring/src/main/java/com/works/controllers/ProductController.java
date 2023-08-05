@@ -43,8 +43,8 @@ public class ProductController {
         return productService.productDetail(pid);
     }
 
-    @GetMapping("/listByCategory")
-    public ResponseEntity listByCategory(){
-        return productService.listByCategory();
+    @GetMapping("/listByCategory/{cid}")
+    public ResponseEntity listByCategory(@PathVariable Long cid){
+        return productService.listByCategory(cid);
     }
 }

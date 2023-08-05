@@ -117,8 +117,8 @@ public class ProductService {
         return null;
     }
 
-    public ResponseEntity listByCategory(){
-        List<IProductCategory> products = productRepository.list();
+    public ResponseEntity listByCategory(Long cid){
+        List<IProductCategory> products = productRepository.list(cid);
         try {
             Rest rest = new Rest(true,products);
             ResponseEntity responseEntity = new ResponseEntity<>(rest,HttpStatus.OK);
