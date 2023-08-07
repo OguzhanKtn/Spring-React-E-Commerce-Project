@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/category")
+@CrossOrigin
 public class CategoryController {
 
     final CategoryService categoryService;

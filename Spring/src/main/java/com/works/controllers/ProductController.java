@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @GetMapping("/listByCategory/{cid}")
-    public ResponseEntity listByCategory(@PathVariable Long cid){
+    public ResponseEntity listByCategory(@PathVariable Integer cid){
         return productService.listByCategory(cid);
     }
 }

@@ -3,7 +3,6 @@ package com.works.services;
 import com.works.config.Rest;
 import com.works.entities.Role;
 import com.works.entities.User;
-import com.works.entities.projections.IUser;
 import com.works.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -64,28 +63,10 @@ public class UserService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> parseRole(List<Role> roles) {
         List<GrantedAuthority> ls = new ArrayList<>();
         for(Role item : roles){
-            ls.add(new SimpleGrantedAuthority(item.getName()));
+            ls.add(new SimpleGrantedAuthority(item.getRole()));
         }
         return ls;
     }
 
-    public ResponseEntity login(User user){
-        List<User> users = userRepository.findAll();
-        try {
-            for (User us : users) {
-                if(user.getEmail().equals(us.getEmail()) && passwordEncoder.matches(user.getPassword(),us.getPassword())){
-                  IUser iUser = userRepository.user(us.getEmail(),us.getPassword());
-                    Rest rest = new Rest(true,iUser);
-                    ResponseEntity responseEntity  = new ResponseEntity<>(rest,HttpStatus.OK);
-                    return responseEntity;
-                }
 
-            }
-        }catch (Exception ex){
-            Rest rest = new Rest(false,ex.getMessage());
-            ResponseEntity responseEntity = new ResponseEntity(rest,HttpStatus.BAD_REQUEST);
-            return responseEntity;
-        }
-    return null ;
-    }
 }

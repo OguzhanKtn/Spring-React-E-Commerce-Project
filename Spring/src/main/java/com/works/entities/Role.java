@@ -15,6 +15,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rid;
 
-    private String name;
+    private String role;
 
 }

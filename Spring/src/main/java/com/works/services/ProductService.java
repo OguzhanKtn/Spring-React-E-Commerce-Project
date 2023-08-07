@@ -117,7 +117,7 @@ public class ProductService {
         return null;
     }
 
-    public ResponseEntity listByCategory(Long cid){
+    public ResponseEntity listByCategory(Integer cid){
         List<IProductCategory> products = productRepository.list(cid);
         try {
             Rest rest = new Rest(true,products);
