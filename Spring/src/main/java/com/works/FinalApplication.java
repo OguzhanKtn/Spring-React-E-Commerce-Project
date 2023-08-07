@@ -3,7 +3,7 @@ package com.works;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootAplication
+@SpringBootApplication
 public class FinalApplication {
 
     public static void main(String[] args) {

@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = "select p.brand,p.price,p.stock,p.title from product as p inner join category c on p.cid = c.cid\n" +
-            "where p.cid = ?",nativeQuery = true)
-    List<IProductCategory> list();
+            "where p.cid = ?1",nativeQuery = true)
+    List<IProductCategory> list(Long cid);
 
 }
