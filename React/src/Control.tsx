@@ -19,7 +19,7 @@ if(stSession !== null){
         user = JSON.parse(plainText) as User
     }catch(error){
         sessionStorage.removeItem('user')
-        navigate('/home')
+        navigate('/')
     }
 }
 

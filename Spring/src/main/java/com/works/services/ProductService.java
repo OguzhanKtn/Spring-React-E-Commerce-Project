@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,9 +51,10 @@ public class ProductService {
 
     public ResponseEntity allProducts(){
         List<Product> products = productRepository.findAll();
+        HashMap map = new HashMap<>();
+        map.put("products",products);
         try{
-            Rest rest = new Rest(true,products);
-            ResponseEntity responseEntity = new ResponseEntity<>(rest,HttpStatus.OK);
+            ResponseEntity responseEntity = new ResponseEntity<>(map,HttpStatus.OK);
             return responseEntity;
         }catch (Exception ex){
             Rest rest = new Rest(false,ex.getMessage());
@@ -119,9 +122,10 @@ public class ProductService {
 
     public ResponseEntity listByCategory(Integer cid){
         List<IProductCategory> products = productRepository.list(cid);
+        HashMap map = new LinkedHashMap();
+        map.put("products",products);
         try {
-            Rest rest = new Rest(true,products);
-            ResponseEntity responseEntity = new ResponseEntity<>(rest,HttpStatus.OK);
+            ResponseEntity responseEntity = new ResponseEntity<>(map,HttpStatus.OK);
             return  responseEntity;
         }catch (Exception ex){
             Rest rest = new Rest(false,ex.getMessage());

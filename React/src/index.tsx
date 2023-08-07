@@ -14,8 +14,8 @@ const router =
 <BrowserRouter>
 <ToastContainer position='top-center' transition={Flip} autoClose={1000} />
 <Routes>
-  <Route path='/' element={<Login/>} />
-  <Route path='/home' element={<Home/>} />
+  <Route path='/login' element={<Login/>} />
+  <Route path='/' element={<Home/>} />
   <Route path='/register' element={<Register/>} />
   <Route path='/profile' element={<Control item = {<Profile/>} />} />
   <Route path='/dashboard' element={<Control item = {<Dashboard/>} />} />

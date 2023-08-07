@@ -11,7 +11,7 @@ const config = axios.create({
     return config.get<Product>('product/listAllProducts')
  }
 
- export const productByCategory = (id:BigInteger) => {
+ export const productByCategory = (id:number) => {
 
-    return config.get<Product>('listByCategory/'+id)
+    return config.get<Product>('product/listByCategory/'+id)
  }

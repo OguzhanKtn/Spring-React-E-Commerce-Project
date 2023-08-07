@@ -1,9 +1,8 @@
 export interface Product {
-    status: boolean;
-    result: Result[];
+    products: Product[];
 }
 
-export interface Result {
+export interface Product {
     pid:   number;
     title: string;
     brand: string;

@@ -23,7 +23,7 @@ function NavbarUser(item:{user:User}) {
 
   const logout = () =>{
     sessionStorage.removeItem('user')
-    navigate('/home')
+    navigate('/')
   }
 
 

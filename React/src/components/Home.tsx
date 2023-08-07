@@ -3,13 +3,13 @@ import { Result } from '../models/Category'
 import { allCategories } from '../services/categoryService'
 import { toast } from 'react-toastify'
 import { ListGroup,Button } from 'reactstrap'
-import { Result } from '../models/Product'
-import { allProducts } from '../services/productService'
+import { Product } from '../models/Product'
+import { allProducts, productByCategory } from '../services/productService'
 
 function Home() {
 
     const [categories, setCategories] = useState<Result[]>([])
-    const [products, setProducts] = useState<Result[]>([])
+    const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
      allCategories().then(res =>{
@@ -19,14 +19,18 @@ function Home() {
      })
     }, [])
     
-    const selectCategory = (cid) =>{
-     console.log(cid)
+    const selectCategory = (cid:number) =>{
+     productByCategory(cid).then(res=>{
+       setProducts(res.data.products)
+     })
     }
     
     useEffect(() => {
   
      allProducts().then(res => {
-        setProducts(res.data.result)
+        setProducts(res.data.products)
+     }).catch((error)=>{
+      toast.error(error)
      })
     }, [])
     
@@ -49,6 +53,7 @@ function Home() {
       </ListGroup>
     </div>
     <div className='col-sm-10'>
+    <h4 className='text-center'>Products</h4>
     <table className="table">
   <thead>
     <tr>
@@ -59,12 +64,14 @@ function Home() {
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td></td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+    {products.map((item,index)=>(
+      <tr key={index}>
+      <td>{item.brand}</td>
+      <td>{item.title}</td>
+      <td>{item.price}$</td>
+      <td>{item.stock}</td>
     </tr>
+    ))}  
   </tbody>
 </table>
     </div>
