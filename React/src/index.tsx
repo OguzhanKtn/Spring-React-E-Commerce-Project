@@ -9,6 +9,7 @@ import Profile from './pages_user/Profile';
 import Control from './Control';
 import Dashboard from './pages_admin/Dashboard';
 import Home from './components/Home';
+import Detail from './pages_user/Detail';
 
 const router = 
 <BrowserRouter>
@@ -19,6 +20,7 @@ const router =
   <Route path='/register' element={<Register/>} />
   <Route path='/profile' element={<Control item = {<Profile/>} />} />
   <Route path='/dashboard' element={<Control item = {<Dashboard/>} />} />
+  <Route path='/detail/:id' element={<Detail/>} />
 </Routes>
 
 </BrowserRouter>

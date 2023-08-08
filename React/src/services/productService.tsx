@@ -15,3 +15,7 @@ const config = axios.create({
 
     return config.get<Product>('product/listByCategory/'+id)
  }
+
+export const productDetail = (id:string) => {
+   return config.get<Product>('product/listByCategory/'+id)
+}

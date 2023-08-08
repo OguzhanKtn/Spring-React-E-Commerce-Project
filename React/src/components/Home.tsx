@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { ListGroup,Button } from 'reactstrap'
 import { Product } from '../models/Product'
 import { allProducts, productByCategory } from '../services/productService'
+import { NavLink } from 'react-router-dom'
 
 function Home() {
 
@@ -66,7 +67,7 @@ function Home() {
   <tbody>
     {products.map((item,index)=>(
       <tr key={index}>
-      <td>{item.brand}</td>
+      <td><NavLink to={"/detail/"+item.pid}>{item.brand}</NavLink></td>
       <td>{item.title}</td>
       <td>{item.price}$</td>
       <td>{item.stock}</td>
