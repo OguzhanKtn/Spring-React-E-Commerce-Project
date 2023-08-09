@@ -65,10 +65,10 @@ public class ProductService {
 
     public ResponseEntity productDetail(Long id){
         Optional<Product> product = productRepository.findById(id);
+
         try{
             if(product.isPresent()){
-                Rest rest = new Rest(true,product.get());
-                ResponseEntity responseEntity = new ResponseEntity<>(rest,HttpStatus.OK);
+                ResponseEntity responseEntity = new ResponseEntity<>(product.get(),HttpStatus.OK);
                 return responseEntity;
             }
 

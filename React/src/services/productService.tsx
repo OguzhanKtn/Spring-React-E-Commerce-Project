@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import { Product } from "../models/Product";
+import { Image } from "../models/Image";
 
 const config = axios.create({
     baseURL : 'http://localhost:8090/',
@@ -17,5 +18,9 @@ const config = axios.create({
  }
 
 export const productDetail = (id:string) => {
-   return config.get<Product>('product/listByCategory/'+id)
+   return config.get<Product>('product/detail/'+id)
+}
+
+export const productImages = (id:string) =>{
+   return config.get<Image>('https://dummyjson.com/products/'+id)
 }
