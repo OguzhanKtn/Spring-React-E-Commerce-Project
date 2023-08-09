@@ -6,6 +6,7 @@ import { Image } from "../models/Image";
 import { User } from "../models/User";
 import { decrypt } from "../util";
 import { order } from "../services/orderService";
+import { toast } from "react-toastify";
 
 function Detail() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Detail() {
     }
   }, []);
 
-const addBasket = (pid:number,title:string,brand:string,price:number,stock:number) => {
+const addBasket = (pid:number) => {
   const stSession = sessionStorage.getItem('user')
   if(stSession == null){
     navigate("/login")
@@ -42,8 +43,8 @@ const addBasket = (pid:number,title:string,brand:string,price:number,stock:numbe
     var user:User
     const plainText = decrypt(stSession)
     user = JSON.parse(plainText) as User
-    order(user.uid,pid,title,brand,price,stock).then(res =>{
-      console.log(res.data)
+    order(user.uid,pid).then(res =>{
+      toast.success("Product added in your basket")
     })
   }
 }
@@ -59,7 +60,7 @@ const addBasket = (pid:number,title:string,brand:string,price:number,stock:numbe
             <p>Price : {item.price}$</p>
             <p>Brand : {item.brand}</p>
             <p>Stock : {item.stock}</p>
-            <button className="btn btn-danger" onClick={()=> addBasket(item.pid,item.title,item.brand,item.price,item.stock)}>
+            <button className="btn btn-danger" onClick={()=> addBasket(item.pid)}>
               <i className="bi bi-cart3"></i> Add Basket
             </button>
           </div>

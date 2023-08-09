@@ -9,4 +9,5 @@ export interface Product {
     price: number;
     stock: number;
     cid:   number;
+    oid: number;
 }

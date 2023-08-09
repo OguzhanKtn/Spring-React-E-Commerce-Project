@@ -2,12 +2,14 @@ package com.works.services;
 
 import com.works.config.Rest;
 import com.works.entities.Order;
+import com.works.entities.projections.IOrder;
 import com.works.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,10 +64,12 @@ public class OrderService {
     }
 
     public ResponseEntity userOrders(Long uid){
-        List<Order> orders = orderRepository.findByUidEquals(uid);
+        List<IOrder> orders = orderRepository.orders(uid);
+        HashMap map = new HashMap<>();
+        map.put("products",orders);
         try{
-            Rest rest = new Rest(true,orders);
-            ResponseEntity responseEntity = new ResponseEntity<>(rest,HttpStatus.OK);
+
+            ResponseEntity responseEntity = new ResponseEntity<>(map,HttpStatus.OK);
             return responseEntity;
         }catch (Exception ex){
             Rest rest = new Rest(false,ex.getMessage());

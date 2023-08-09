@@ -14,6 +14,6 @@ public class Order {
 
     private Long uid;
 
-    @ManyToMany
-    List<Product> products;
+    private Long pid;
+
 }
