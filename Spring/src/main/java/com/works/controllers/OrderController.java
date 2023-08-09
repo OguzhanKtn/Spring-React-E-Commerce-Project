@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/order")
+@CrossOrigin
 public class OrderController {
 
     final OrderService orderService;
 
-    @GetMapping("/save")
+    @PostMapping("/save")
     public ResponseEntity save(@RequestBody Order order){
         return orderService.save(order);
     }
