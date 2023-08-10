@@ -58,7 +58,7 @@ function NavbarUser(item:{user:User}) {
           </a>
           <ul className="dropdown-menu">
             {categories.map((item,index)=>(
-               <li><NavLink to={item.name} className="dropdown-item" key={index} >{item.name}</NavLink></li>
+               <li><NavLink to={"/category/"+item.cid} className="dropdown-item" key={index} >{item.name}</NavLink></li>
             ))}
            
           </ul>

@@ -10,12 +10,14 @@ import Control from './Control';
 import Dashboard from './pages_admin/Dashboard';
 import Home from './components/Home';
 import Detail from './pages_user/Detail';
+import Category from './pages_user/Category';
 
 const router = 
 <BrowserRouter>
 <ToastContainer position='top-center' transition={Flip} autoClose={1000} />
 <Routes>
   <Route path='/login' element={<Login/>} />
+  <Route path='/category/:id' element={<Category/>}/>
   <Route path='/' element={<Home/>} />
   <Route path='/register' element={<Register/>} />
   <Route path='/profile' element={<Control item = {<Profile/>} />} />
