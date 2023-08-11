@@ -17,7 +17,7 @@ function Login() {
         const stData = JSON.stringify(res.data.result)
         const cipherText = encrypt(stData)
         sessionStorage.setItem('user',cipherText)
-        console.log(res.data.result.role)
+        console.log(res.data.result)
         if(res.data.result.role == "ROLE_user"){
           navigate('/profile')
         }else if(res.data.result.role == "ROLE_admin"){

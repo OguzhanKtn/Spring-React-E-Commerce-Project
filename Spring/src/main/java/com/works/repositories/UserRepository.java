@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmailEqualsIgnoreCase(String email);
 
-    @Query(value = "select u.uid ,u.name,u.surname, r.role from user as u inner join user_roles ur on u.uid = ur.user_uid inner join\n" +
+    @Query(value = "select u.uid ,u.name,u.surname,u.email, u.password, r.role from user as u inner join user_roles ur on u.uid = ur.user_uid inner join\n" +
             "    role r on ur.roles_rid = r.rid where u.email=?1 and u.password=?2",nativeQuery = true)
     IUser user (String mail,String password);
 

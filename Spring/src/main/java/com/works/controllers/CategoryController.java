@@ -14,12 +14,12 @@ public class CategoryController {
 
     final CategoryService categoryService;
 
-    @GetMapping("/save")
+    @PostMapping("/save")
     public ResponseEntity save(@RequestBody Category category){
        return categoryService.save(category);
     }
 
-    @GetMapping("/update")
+    @PostMapping("/update")
     public ResponseEntity update(@RequestBody Category category){
         return categoryService.updateCategory(category);
     }

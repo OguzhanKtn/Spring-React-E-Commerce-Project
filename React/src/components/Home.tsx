@@ -6,7 +6,7 @@ import { ListGroup,Button } from 'reactstrap'
 import { Product } from '../models/Product'
 import { allProducts, productByCategory } from '../services/productService'
 import { NavLink } from 'react-router-dom'
-import NavbarUser from './NavbarUser'
+
 
 function Home() {
 

@@ -11,6 +11,7 @@ import Dashboard from './pages_admin/Dashboard';
 import Home from './components/Home';
 import Detail from './pages_user/Detail';
 import Category from './pages_user/Category';
+import CategoryManager from './pages_admin/CategoryManager';
 
 const router = 
 <BrowserRouter>
@@ -18,6 +19,7 @@ const router =
 <Routes>
   <Route path='/login' element={<Login/>} />
   <Route path='/category/:id' element={<Category/>}/>
+  <Route path='/categorymanager' element={<Control item={<CategoryManager/>} />}/>
   <Route path='/' element={<Home/>} />
   <Route path='/register' element={<Register/>} />
   <Route path='/profile' element={<Control item = {<Profile/>} />} />
