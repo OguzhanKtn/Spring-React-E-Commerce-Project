@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { productDetail, productImages } from "../services/productService";
 import { Product } from "../models/Product";
 import { Image } from "../models/Image";
@@ -63,11 +63,14 @@ const addBasket = (pid:number) => {
             <button className="btn btn-danger" onClick={()=> addBasket(item.pid)}>
               <i className="bi bi-cart3"></i> Add Basket
             </button>
+            <NavLink to="/basket" className="btn btn-primary ml-3" role="button">
+            <i className="bi bi-cart3"></i> Go to basket</NavLink>
           </div>
           <div className="col-sm-6">
             <img src={image} className="img-fluid img-thumbnail" />
           </div>
         </div>
+        
       )}
       {imgPrd && (
         <div className="row">
