@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Result } from '../models/Category'
+import { Category } from '../models/Category'
 import { allCategories } from '../services/categoryService'
 import { toast } from 'react-toastify'
 import { ListGroup,Button } from 'reactstrap'
@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom'
 
 function Home() {
 
-    const [categories, setCategories] = useState<Result[]>([])
+    const [categories, setCategories] = useState<Category[]>([])
     const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {

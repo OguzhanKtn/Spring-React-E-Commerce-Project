@@ -71,11 +71,6 @@ function NavbarUser(item:{user:User}) {
               <li className="nav-item">
                 <a className="nav-link disabled">{item.user && item.user.name} {item.user && item.user.surname}</a>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/basket">
-                <i className="bi bi-cart3"></i> Basket
-                </NavLink>
-              </li>
             </ul>
             <form className="d-flex" role="search">
               <input

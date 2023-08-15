@@ -9,3 +9,12 @@ import { Category } from "../models/Category";
  export const allCategories = () =>{
     return config.get<Category>('category/list')
  }
+
+ export const categorySave = (name:string) => {
+    
+   const sendObj = {
+       name:name
+   }
+   
+       return config.post('category/save',sendObj) 
+ }

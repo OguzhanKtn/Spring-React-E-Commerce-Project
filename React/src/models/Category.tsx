@@ -1,10 +1,10 @@
 export interface Category {
     status: boolean;
-    result: Result[];
+    result: Category[];
 }
 
 
-export interface Result {
+export interface Category {
     cid:  number;
     name: string;
 }
