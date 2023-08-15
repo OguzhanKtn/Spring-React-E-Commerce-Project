@@ -6,4 +6,5 @@ public interface IOrder {
     String getTitle();
     String getPrice();
     String getStock();
+    String getQuantity();
 }

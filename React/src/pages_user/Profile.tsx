@@ -13,7 +13,7 @@ function Profile() {
   const [orders, setOrders] = useState<Product[]>([]);
 
   const session = sessionStorage.getItem("user");
-
+  
   useEffect(() => {
     if (session) {
       var user: User;
@@ -25,19 +25,18 @@ function Profile() {
     } else {
       navigate("/login");
     }
+
   }, []);
 
   const cancelOrder = (oid:number) => { 
-      deleteOrder(oid).then(res=>{   
-        setOrders(orders => orders.filter((u) => u.oid !== oid))
-        toast.warning("Product has removed from your basket !")   
-      })
-      
-  }
+    deleteOrder(oid)
+    window.location.reload()
+       
+}
 
   return (
     <>
-      {orders && (
+      {orders.length > 0 && (
         <div className="container">
           <table className="table">
             <thead>
@@ -45,6 +44,7 @@ function Profile() {
                 <th scope="col">Brand</th>
                 <th scope="col">Title</th>
                 <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Delete</th>
               </tr>
             </thead>
@@ -54,10 +54,10 @@ function Profile() {
                   <th scope="row">{item.brand}</th>
                   <td>{item.title}</td>
                   <td>{item.price}</td>
+                  <td>{item.quantity}</td>
                   <td><Button className="btn btn-danger btn-sm" onClick={()=> cancelOrder(item.oid)}>Delete</Button></td>
                 </tr>
-              ))}
-                
+              ))}      
             </tbody>
           </table>
         </div>

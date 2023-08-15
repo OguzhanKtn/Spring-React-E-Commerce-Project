@@ -20,7 +20,6 @@ function Detail() {
   useEffect(() => {
     if (id) {
       productDetail(id).then((res) => {
-        console.log(res.data)
         setItem(res.data);
       });
     }
@@ -49,6 +48,15 @@ const addBasket = (pid:number) => {
   }
 }
 
+const goToBasket = () => {
+  const stSession = sessionStorage.getItem('user')
+  if(stSession == null){
+    navigate("/login")
+  }else{
+    navigate("/basket")
+  }
+}
+
   return (
     <>
       {item && (
@@ -63,8 +71,9 @@ const addBasket = (pid:number) => {
             <button className="btn btn-danger" onClick={()=> addBasket(item.pid)}>
               <i className="bi bi-cart3"></i> Add Basket
             </button>
-            <NavLink to="/basket" className="btn btn-primary ml-3" role="button">
-            <i className="bi bi-cart3"></i> Go to basket</NavLink>
+            <button className="btn btn-primary ml-3" onClick={()=> goToBasket()}>
+              <i className="bi bi-cart3"></i> Go to basket
+            </button>
           </div>
           <div className="col-sm-6">
             <img src={image} className="img-fluid img-thumbnail" />

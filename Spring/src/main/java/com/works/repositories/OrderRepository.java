@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    @Query(value = "select o.oid, p.brand,p.title,p.price,p.stock from product as p inner join `order` as o on p.pid = o.pid\n" +
-            "where o.uid =?1",nativeQuery = true)
+    @Query(value = "select o.oid, p.brand,p.title,p.price,p.stock,count(p.pid) as Quantity from product as p inner join `order` as o on p.pid = o.pid\n" +
+            "        where o.uid =?1 group by o.pid",nativeQuery = true)
     List<IOrder> orders(Long uid);
 
 }

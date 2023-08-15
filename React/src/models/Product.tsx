@@ -10,4 +10,5 @@ export interface Product {
     stock: number;
     cid:   number;
     oid: number;
+    quantity:number
 }

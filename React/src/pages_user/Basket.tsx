@@ -11,8 +11,10 @@ function Basket() {
 
     const navigate = useNavigate();
     const [orders, setOrders] = useState<Product[]>([]);
+    const [totalPrice,setTotalPrice] = useState(Number)
 
     const session = sessionStorage.getItem("user");
+    
   
     useEffect(() => {
       if (session) {
@@ -25,27 +27,30 @@ function Basket() {
       } else {
         navigate("/login");
       }
+
+      let total = orders.reduce((acc,product)=>acc + product.price * product.quantity,0)
+      setTotalPrice(total)
+
     }, []);
-  
-    const cancelOrder = (oid:number) => { 
-        deleteOrder(oid).then(res=>{   
-          setOrders(orders => orders.filter((u) => u.oid !== oid))
-          toast.warning("Product has removed from your basket !")   
-        })
-        
+   
+   const cancelOrder = (oid:number) => { 
+    deleteOrder(oid)
+    window.location.reload()
     }
 
   return (
     <div>
  <>
-      {orders && (
+      {orders.length > 0 && (
         <div className="container">
+          <div className="col-sm-6">
           <table className="table">
             <thead>
               <tr>
                 <th scope="col">Brand</th>
                 <th scope="col">Title</th>
                 <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Delete</th>
               </tr>
             </thead>
@@ -55,12 +60,16 @@ function Basket() {
                   <th scope="row">{item.brand}</th>
                   <td>{item.title}</td>
                   <td>{item.price}</td>
+                  <td>{item.quantity}</td>
                   <td><Button className="btn btn-danger btn-sm" onClick={()=> cancelOrder(item.oid)}>Delete</Button></td>
                 </tr>
-              ))}
-                
+              ))}         
             </tbody>
           </table>
+          </div>
+          <div className="col-sm-6">
+            <h4>Total Price : {totalPrice!}</h4>
+          </div>
         </div>
       )}
     </>
