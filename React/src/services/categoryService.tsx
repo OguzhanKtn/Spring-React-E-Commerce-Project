@@ -18,3 +18,7 @@ import { Category } from "../models/Category";
    
        return config.post('category/save',sendObj) 
  }
+
+ export const categoryDelete = (cid:number) =>{
+   return config.get('category/delete/'+cid)
+ }

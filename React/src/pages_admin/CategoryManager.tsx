@@ -1,28 +1,45 @@
 import React, { useState, useEffect, FormEvent } from "react";
-import { allCategories, categorySave } from "../services/categoryService";
+import { allCategories, categoryDelete, categorySave } from "../services/categoryService";
 import { toast } from "react-toastify";
 import { Category } from "../models/Category";
+import { Button } from "reactstrap";
 
 function CategoryManager() {
   const [categoryName, setCategoryname] = useState("");
   const [categories,SetCategories] = useState<Category[]>([])
 
-  const sendForm = (evt: FormEvent) => {
-    evt.preventDefault();
-    categorySave(categoryName)?.then((res) => {
+  const sendForm = async (evt:FormEvent) => {
+    evt.preventDefault()
+   await categorySave(categoryName)?.then((res) => {
       if (res.data.status == true) {
         toast.success("Category Added !");
       } else {
         toast.error("Cannot Added !");
       }
     });
+    const res = await allCategories()
+    SetCategories(res.data.result)
   };
 
-  useEffect(() => {
-    allCategories().then(res=>{
-        SetCategories(res.data.result)
+  useEffect( () => {
+    allCategories().then(res =>{
+      SetCategories(res.data.result)
     })
   }, [])
+
+  const deleteCategory = async (cid:number)=>{
+    await categoryDelete(cid).then(res=>{
+      if(res.status==200){
+        toast.success("Category deleted!")
+      }else{
+        toast.error("Cannot deleted!")
+      }
+     })
+
+     const res = await allCategories()
+     SetCategories(res.data.result)
+
+  }
   
 
   return (
@@ -46,7 +63,6 @@ function CategoryManager() {
             <thead>
               <tr>
                 <th scope="col">Category Name</th>
-                <th scope="col">Update</th>
                 <th scope="col">Delete</th>
               </tr>
             </thead>
@@ -54,8 +70,7 @@ function CategoryManager() {
                 {categories.map((item,index)=>(
                 <tr key={index}>
                 <td>{item.name}</td>
-                <td></td>
-                <td>@mdo</td>
+                <td><Button className="btn btn-danger btn-sm" onClick={() => deleteCategory(item.cid)}>Delete</Button></td>
               </tr>       
                 ))}    
             </tbody>

@@ -50,6 +50,12 @@ function Basket() {
       });
     
       setTotalPrice(total);
+
+      if(orders.length >0){
+        toast.success("One product has removed !")
+      }else{
+        toast.warning("No any product in basket !")
+      }
     };
 
 
@@ -75,7 +81,7 @@ function Basket() {
                 <tr key={index}>
                   <th scope="row">{item.brand}</th>
                   <td>{item.title}</td>
-                  <td>{item.price}</td>
+                  <td>{item.price} $</td>
                   <td>{item.quantity}</td>
                   <td><Button className="btn btn-danger btn-sm" onClick={()=> cancelOrder(item.oid)}>Delete</Button></td>
                 </tr>
@@ -84,7 +90,7 @@ function Basket() {
           </table>
           </div>
           <div className="col-sm-6">
-            <h4>Total Price : {totalPrice!}</h4>
+            <h4>Total Price : {totalPrice!} $</h4>
           </div>
         </div>
       )}
