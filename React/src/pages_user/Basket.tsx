@@ -13,31 +13,47 @@ function Basket() {
     const [orders, setOrders] = useState<Product[]>([]);
     const [totalPrice,setTotalPrice] = useState(Number)
 
-    const session = sessionStorage.getItem("user");
-    
+    const session = sessionStorage.getItem("user")
+    let total = 0
   
     useEffect(() => {
       if (session) {
         var user: User;
-        const plainText = decrypt(session);
-        user = JSON.parse(plainText) as User;
-        userOrders(user.uid).then((res) => {
-          setOrders(res.data.products);
-        });
+        const plainText = decrypt(session)
+        user = JSON.parse(plainText) as User
+            userOrders(user.uid).then(res =>{
+              setOrders(res.data.products)
+              res.data.products.map((item) => {
+                total += item.quantity * item.price;
+            });  
+            setTotalPrice(total);
+            })
+                           
       } else {
         navigate("/login");
-      }
-
-      let total = orders.reduce((acc,product)=>acc + product.price * product.quantity,0)
-      setTotalPrice(total)
-
+      } 
     }, []);
-   
-   const cancelOrder = (oid:number) => { 
-    deleteOrder(oid)
-    window.location.reload()
-    }
 
+   
+    const cancelOrder = async (oid: number) => {
+
+      await deleteOrder(oid);
+      var user: User;
+      const plainText = decrypt(session!);
+      user = JSON.parse(plainText) as User;
+    
+      const res = await userOrders(user.uid);
+      setOrders(res.data.products);
+        
+      res.data.products.map((item) => {
+          total += item.quantity * item.price;
+      });
+    
+      setTotalPrice(total);
+    };
+
+
+    
   return (
     <div>
  <>
@@ -72,7 +88,7 @@ function Basket() {
           </div>
         </div>
       )}
-    </>
+  </>
 
     </div>
   )
