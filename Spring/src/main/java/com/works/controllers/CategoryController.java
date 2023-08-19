@@ -19,11 +19,6 @@ public class CategoryController {
        return categoryService.save(category);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity update(@RequestBody Category category){
-        return categoryService.updateCategory(category);
-    }
-
     @GetMapping("/delete/{cid}")
     public ResponseEntity delete(@PathVariable Long cid){
         return categoryService.deleteCategory(cid);

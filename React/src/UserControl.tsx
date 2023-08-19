@@ -1,11 +1,11 @@
 import React from 'react'
 import { User } from './models/User'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { decrypt } from './util'
 import NavbarUser from './components/NavbarUser'
-import NavbarAdmin from './components/NavbarAdmin'
 
-function Control(props:{item:JSX.Element}) {
+
+function UserControl(props:{item:JSX.Element}) {
 
     const navigate = useNavigate()
     const stSession = sessionStorage.getItem('user')
@@ -27,22 +27,14 @@ if(stSession !== null){
     <>
         {
           
-          user!.role === "ROLE_user"
-            ?
-            <>
+           user!.role === "ROLE_user" &&     
+           <>
             <NavbarUser user={user!} />
             {props.item}
-            </>
-            :
-            <>
-            <NavbarAdmin user={user!} />
-            {props.item}
-            </>
+            </>    
         }
-
-
     </>
   )
 }
 
-export default Control
+export default UserControl

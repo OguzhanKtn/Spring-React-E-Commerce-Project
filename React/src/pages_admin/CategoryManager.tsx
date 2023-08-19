@@ -5,9 +5,10 @@ import { Category } from "../models/Category";
 import { Button } from "reactstrap";
 
 function CategoryManager() {
+
   const [categoryName, setCategoryname] = useState("");
   const [categories,SetCategories] = useState<Category[]>([])
-
+  
   const sendForm = async (evt:FormEvent) => {
     evt.preventDefault()
    await categorySave(categoryName)?.then((res) => {
