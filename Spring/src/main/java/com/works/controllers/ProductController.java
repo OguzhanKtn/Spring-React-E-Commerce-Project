@@ -14,7 +14,7 @@ public class ProductController {
 
     final ProductService productService;
 
-    @GetMapping("/save")
+    @PostMapping("/save")
     public ResponseEntity save(@RequestBody Product product){
         return productService.save(product);
     }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deleteOrder, order, userOrders } from "../services/orderService";
+import { deleteOrder,userOrders } from "../services/orderService";
 import { decrypt } from "../util";
 import { useNavigate } from "react-router-dom";
 import { User } from "../models/User";

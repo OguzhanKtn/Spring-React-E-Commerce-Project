@@ -24,3 +24,14 @@ export const productDetail = (id:string) => {
 export const productImages = (id:string) =>{
    return config.get<Image>('https://dummyjson.com/products/'+id)
 }
+
+export const productSave = (title:string,brand:string,price:string,stock:string,cid:string) => {
+ const sendObj= {
+      title:title,
+      brand:brand,
+      price:price,
+      stock:stock,
+      cid:cid
+   }
+   return config.post('product/save',sendObj)
+}
