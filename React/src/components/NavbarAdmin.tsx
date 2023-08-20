@@ -48,6 +48,11 @@ function NavbarAdmin(item:{user:User}) {
                    </NavLink>
                  </li>
                  <li className="nav-item">
+                   <NavLink className="nav-link" to="/orderlist">
+                     Orders
+                   </NavLink>
+                 </li>
+                 <li className="nav-item">
                    <a className="nav-link" role="button" onClick={logout}>
                      Logout
                    </a>

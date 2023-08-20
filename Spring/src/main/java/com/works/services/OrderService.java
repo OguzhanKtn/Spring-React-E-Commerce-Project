@@ -2,6 +2,7 @@ package com.works.services;
 
 import com.works.config.Rest;
 import com.works.entities.Order;
+import com.works.entities.projections.IAllOrders;
 import com.works.entities.projections.IOrder;
 import com.works.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -51,10 +52,11 @@ public class OrderService {
     }
 
     public ResponseEntity orderList(){
-        List<Order> orders = orderRepository.findAll();
+        List<IAllOrders> orders = orderRepository.allOrders();
+        HashMap map = new HashMap<>();
+        map.put("products",orders);
         try {
-            Rest rest = new Rest(true,orders);
-            ResponseEntity responseEntity = new ResponseEntity<>(rest, HttpStatus.OK);
+            ResponseEntity responseEntity = new ResponseEntity<>(map, HttpStatus.OK);
             return responseEntity;
         }catch (Exception ex){
             Rest rest = new Rest(false,ex.getMessage());

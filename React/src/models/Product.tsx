@@ -11,4 +11,5 @@ export interface Product {
     cid:   number;
     oid: number;
     quantity:number
+    email:string
 }

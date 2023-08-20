@@ -16,6 +16,7 @@ import Basket from './pages_user/Basket';
 import AdminControl from './AdminControl';
 import ProductManager from './pages_admin/ProductManager';
 import UpdateProduct from './pages_admin/UpdateProduct';
+import OrderList from './pages_admin/OrderList';
 
 const router = 
 <BrowserRouter>
@@ -25,6 +26,7 @@ const router =
   <Route path='/category/:id' element={<Category/>}/>
   <Route path='/categorymanager' element={<AdminControl item={<CategoryManager/>} />}/>
   <Route path='/productmanager' element={<AdminControl item={<ProductManager/>} />}/>
+  <Route path='/orderlist' element={<AdminControl item={<OrderList/>} />}/>
   <Route path='/updateproduct/:id' element={<AdminControl item={<UpdateProduct/>} />}/>
   <Route path='/' element={<Home/>} />
   <Route path='/register' element={<Register/>} />

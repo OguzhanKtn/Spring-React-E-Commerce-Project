@@ -23,3 +23,7 @@ const config = axios.create({
  export const deleteOrder = (oid:number) =>{
     return config.get('order/delete/'+oid)
  }
+
+ export const allOrders = ()=>{
+   return config.get<Product>('order/listAll')
+ }
