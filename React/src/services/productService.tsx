@@ -35,3 +35,18 @@ export const productSave = (title:string,brand:string,price:string,stock:string,
    }
    return config.post('product/save',sendObj)
 }
+
+export const productDelete = (pid:number) => {
+   return config.get('product/delete/'+pid)
+}
+
+export const productUpdate = (pid:string,title:string,brand:string,price:string,stock:string)=>{
+   const sendObj={
+      pid:pid,
+      title:title,
+      brand:brand,
+      price:price,
+      stock:stock
+   }
+   return config.post('product/update',sendObj)
+}

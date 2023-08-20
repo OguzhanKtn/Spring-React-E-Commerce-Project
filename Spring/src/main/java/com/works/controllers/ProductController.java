@@ -19,7 +19,7 @@ public class ProductController {
         return productService.save(product);
     }
 
-    @GetMapping("/update")
+    @PostMapping("/update")
     public ResponseEntity update(@RequestBody Product product){
         return productService.productUpdate(product);
     }
