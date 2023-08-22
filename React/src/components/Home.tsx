@@ -4,7 +4,7 @@ import { allCategories } from '../services/categoryService'
 import { toast } from 'react-toastify'
 import { ListGroup,Button } from 'reactstrap'
 import { Product } from '../models/Product'
-import { pageProducts, productByCategory } from '../services/productService'
+import { allProducts, pageProducts, productByCategory } from '../services/productService'
 import { NavLink } from 'react-router-dom'
 
 
@@ -12,6 +12,7 @@ function Home() {
 
     const [categories, setCategories] = useState<Category[]>([])
     const [products, setProducts] = useState<Product[]>([])
+    const [allProduct,setAllProduct] = useState<Product[]>([])
     const [page, setPage] = useState(0)
 
     
@@ -20,6 +21,10 @@ function Home() {
       setCategories(res.data.result)
      }).catch((error)=>{
       toast.error(error)
+     })
+
+     allProducts().then(res=>{
+      setAllProduct(res.data.products)
      })
     }, [])
     
@@ -35,23 +40,26 @@ function Home() {
      }).catch((error)=>{
       toast.error(error)
      })
-    }, [])
+    }, [page])
     
-  const previous =  () =>{
-   setPage(page-1)
-   console.log(page)
-     pageProducts(page).then(res=>{
-      setProducts(res.data.content)
-    })
+  const previous = () =>{
+    if(page >0){
+     setPage(page-1)
+    } 
   }
 
-  const next =  () =>{
-    setPage(page+1)
-    console.log(page)
-     pageProducts(page).then(res=>{
-      setProducts(res.data.content)
-    })
+   const next = () =>{
+   if(allProduct.length % 3 > 0){
+    if(page <= products.length/3 +1){
+     setPage(page+1)
+    }
+   }else{
+    if(page <= products.length){
+      setPage(page+1)
+    }
+   }  
   }
+
   return (    
     <>
     <div className="container">
@@ -94,7 +102,7 @@ function Home() {
     </div>
     <nav aria-label="Page navigation example" className='mt-3'>
       <ul className="pagination">
-        <li className="page-item"><a className="page-link" onClick={()=>previous()}>Previous</a></li>
+        <li className="page-item"><a className="page-link" onClick={()=> previous()}>Previous</a></li>
         <li className="page-item"><a className="page-link" onClick={()=> next()}>Next</a></li>
      </ul>
   </nav>
