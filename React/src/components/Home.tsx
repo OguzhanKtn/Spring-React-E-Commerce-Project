@@ -4,7 +4,7 @@ import { allCategories } from '../services/categoryService'
 import { toast } from 'react-toastify'
 import { ListGroup,Button } from 'reactstrap'
 import { Product } from '../models/Product'
-import { allProducts, productByCategory } from '../services/productService'
+import { pageProducts, productByCategory } from '../services/productService'
 import { NavLink } from 'react-router-dom'
 
 
@@ -12,7 +12,9 @@ function Home() {
 
     const [categories, setCategories] = useState<Category[]>([])
     const [products, setProducts] = useState<Product[]>([])
+    const [page, setPage] = useState(0)
 
+    
     useEffect(() => {
      allCategories().then(res =>{
       setCategories(res.data.result)
@@ -28,15 +30,28 @@ function Home() {
     }
     
     useEffect(() => {
-  
-     allProducts().then(res => {
-        setProducts(res.data.products)
+     pageProducts(page).then(res => {
+        setProducts(res.data.content)
      }).catch((error)=>{
       toast.error(error)
      })
     }, [])
     
+  const previous =  () =>{
+   setPage(page-1)
+   console.log(page)
+     pageProducts(page).then(res=>{
+      setProducts(res.data.content)
+    })
+  }
 
+  const next =  () =>{
+    setPage(page+1)
+    console.log(page)
+     pageProducts(page).then(res=>{
+      setProducts(res.data.content)
+    })
+  }
   return (    
     <>
     <div className="container">
@@ -77,6 +92,12 @@ function Home() {
 </table>
     </div>
     </div>
+    <nav aria-label="Page navigation example" className='mt-3'>
+      <ul className="pagination">
+        <li className="page-item"><a className="page-link" onClick={()=>previous()}>Previous</a></li>
+        <li className="page-item"><a className="page-link" onClick={()=> next()}>Next</a></li>
+     </ul>
+  </nav>
     </div> 
     </>
   )

@@ -30,8 +30,8 @@ public class ProductController {
     }
 
     @GetMapping("/listSomeProducts")
-    public ResponseEntity list(){
-        return productService.listProducts();
+    public ResponseEntity list(@RequestParam(defaultValue = "0") int page){
+        return productService.listProducts(page);
     }
 
     @GetMapping("/listAllProducts")

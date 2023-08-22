@@ -1,5 +1,6 @@
 export interface Product {
     products: Product[];
+    content : Product[]
 }
 
 export interface Product {

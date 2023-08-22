@@ -8,8 +8,12 @@ const config = axios.create({
     timeout: 15000
  })
 
+ export const pageProducts = (page:number) =>{
+    return config.get<Product>('product/listSomeProducts?page='+page+'')
+ }
+
  export const allProducts = () =>{
-    return config.get<Product>('product/listAllProducts')
+   return config.get<Product>('product/listAllProducts')
  }
 
  export const productByCategory = (id:number) => {

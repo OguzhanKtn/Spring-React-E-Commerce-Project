@@ -36,11 +36,10 @@ public class ProductService {
         }
     }
 
-    public ResponseEntity listProducts(){
-        Page<Product> products = productRepository.findAll(PageRequest.of(0,20, Sort.by(Sort.Direction.DESC,"pid")));
+    public ResponseEntity listProducts(int page){
+        Page<Product> products = productRepository.findAll(PageRequest.of(page,3, Sort.by(Sort.Direction.DESC,"pid")));
         try{
-            Rest rest = new Rest(true,products);
-            ResponseEntity responseEntity = new ResponseEntity<>(rest,HttpStatus.OK);
+            ResponseEntity responseEntity = new ResponseEntity<>(products,HttpStatus.OK);
             return responseEntity;
         }catch (Exception ex){
             Rest rest = new Rest(false,ex.getMessage());
