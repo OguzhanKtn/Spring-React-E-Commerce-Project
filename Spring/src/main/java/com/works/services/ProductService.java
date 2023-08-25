@@ -37,7 +37,7 @@ public class ProductService {
     }
 
     public ResponseEntity listProducts(int page){
-        Page<Product> products = productRepository.findAll(PageRequest.of(page,3, Sort.by(Sort.Direction.DESC,"pid")));
+        Page<Product> products = productRepository.findAll(PageRequest.of(page,10, Sort.by(Sort.Direction.DESC,"pid")));
         try{
             ResponseEntity responseEntity = new ResponseEntity<>(products,HttpStatus.OK);
             return responseEntity;

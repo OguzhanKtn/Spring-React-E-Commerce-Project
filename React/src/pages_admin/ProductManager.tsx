@@ -4,10 +4,11 @@ import { allCategories } from "../services/categoryService";
 import { allProducts, productDelete, productSave } from "../services/productService";
 import { toast } from "react-toastify";
 import { Product } from "../models/Product";
-import { Button } from "reactstrap";
+import { Button} from "reactstrap";
 import { NavLink } from "react-router-dom";
 
 function ProductManager() {
+
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
   const [price, setPrice] = useState("");
@@ -15,7 +16,7 @@ function ProductManager() {
   const [cid, setCid] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [products,setProducts] = useState<Product[]>([])
-
+ 
   const getOption = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     setCid(value);

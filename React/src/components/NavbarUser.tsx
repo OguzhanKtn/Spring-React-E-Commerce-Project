@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{FormEvent, useEffect, useState} from 'react'
 import { NavLink,useNavigate } from 'react-router-dom'
 import { User } from '../models/User'
 import { Category } from '../models/Category'
@@ -20,12 +20,15 @@ function NavbarUser(item:{user:User}) {
      
   }, [])
   
-
   const logout = () =>{
     sessionStorage.removeItem('user')
     navigate('/')
   }
 
+  const sendForm = (evt:FormEvent) =>{
+    evt.preventDefault()
+    
+  }
 
   return (
   <div className="container">
@@ -72,7 +75,7 @@ function NavbarUser(item:{user:User}) {
                 <a className="nav-link disabled">{item.user && item.user.name} {item.user && item.user.surname}</a>
               </li>
             </ul>
-            <form className="d-flex" role="search">
+            <form className="d-flex" role="search" onSubmit={sendForm}>
               <input
                 className="form-control me-2"
                 type="search"

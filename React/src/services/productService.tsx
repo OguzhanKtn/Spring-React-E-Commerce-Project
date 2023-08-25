@@ -6,7 +6,7 @@ import { Image } from "../models/Image";
 
 const config = axios.create({
     baseURL : 'http://localhost:8090/',
-    timeout: 15000,
+    timeout: 15000
  })
 
  export const pageProducts = (page:number) =>{
