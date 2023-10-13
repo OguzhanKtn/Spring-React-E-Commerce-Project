@@ -1,4 +1,3 @@
-import React from 'react'
 import { User } from './models/User'
 import { useNavigate } from 'react-router-dom'
 import { decrypt } from './util'

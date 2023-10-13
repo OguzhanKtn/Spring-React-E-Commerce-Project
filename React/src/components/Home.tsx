@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Category } from '../models/Category'
 import { allCategories } from '../services/categoryService'
 import { toast } from 'react-toastify'
 import { ListGroup,Button } from 'reactstrap'
 import { Product } from '../models/Product'
-import { allProducts, pageProducts, productByCategory } from '../services/productService'
+import { pageProducts, productByCategory } from '../services/productService'
 import { NavLink } from 'react-router-dom'
 
 
@@ -12,19 +12,13 @@ function Home() {
 
     const [categories, setCategories] = useState<Category[]>([])
     const [products, setProducts] = useState<Product[]>([])
-    const [allProduct,setAllProduct] = useState<Product[]>([])
     const [page, setPage] = useState(0)
-
     
     useEffect(() => {
      allCategories().then(res =>{
       setCategories(res.data.result)
      }).catch((error)=>{
       toast.error(error)
-     })
-
-     allProducts().then(res=>{
-      setAllProduct(res.data.products)
      })
     }, [])
     
@@ -43,21 +37,18 @@ function Home() {
     }, [page])
     
   const previous = () =>{
+    document.querySelector("#next")?.classList.remove('disabled')
     if(page >0){
      setPage(page-1)
     } 
   }
 
    const next = () =>{
-   if(allProduct.length % 3 > 0){
-    if(page <= products.length/3 +1){
-     setPage(page+1)
-    }
-   }else{
-    if(page <= products.length){
+    if(products.length > 0 && products.length == 10){
       setPage(page+1)
+    }else if(products.length < 10){
+      document.querySelector("#next")?.classList.add('disabled')
     }
-   }  
   }
 
   return (    
@@ -96,7 +87,8 @@ function Home() {
       <td>{item.price}$</td>
       <td>{item.stock}</td>
     </tr>
-    ))}  
+    ))
+    }  
   </tbody>
 </table>
     </div>
@@ -104,7 +96,7 @@ function Home() {
     <nav aria-label="Page navigation example" className='mt-3'>
       <ul className="pagination">
         <li className="page-item"><a className="page-link" onClick={()=> previous()}>Previous</a></li>
-        <li className="page-item"><a className="page-link" onClick={()=> next()}>Next</a></li>
+        <li className="page-item"><a className="page-link" id='next' onClick={()=> next()}>Next</a></li>
      </ul>
   </nav>
     </div> 
